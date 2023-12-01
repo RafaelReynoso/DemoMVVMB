@@ -10,7 +10,7 @@ namespace DemoMVVMB
         {
             InitializeComponent();
 
-            MainPage = new Views.Sueldo();
+            MainPage = new Views.Task();
         }
 
         protected override void OnStart()
