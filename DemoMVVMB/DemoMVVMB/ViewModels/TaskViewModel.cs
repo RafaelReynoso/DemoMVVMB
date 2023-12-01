@@ -65,14 +65,16 @@ namespace DemoMVVMB.ViewModels
             }
         }
 
-        public ICommand Grabar { protected set; get; }
-        public ICommand Listar { protected set; get; }
+        public ICommand Save { protected set; get; }
+        public ICommand Get { protected set; get; }
 
         public TaskViewModel()
         {
-            Grabar = new Command(() =>
+            Save = new Command(() =>
             {
-
+                TaskModel task= new TaskModel();
+                task.Title = Title;
+                TaskModel.Add(task);
             });
         }
 
