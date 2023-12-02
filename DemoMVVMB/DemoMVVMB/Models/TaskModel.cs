@@ -8,7 +8,12 @@ namespace DemoMVVMB.Models
     {
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Status { get; set; }
-        public TaskModel() { }
+        public bool Status { get; set; }
+        public TaskModel(string title, bool status, string description)
+        {
+            Title = title;
+            Status = status;
+            Description = description;
+        }
     }
 }

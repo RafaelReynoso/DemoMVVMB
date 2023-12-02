@@ -1,6 +1,7 @@
 ﻿using DemoMVVMB.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -9,7 +10,7 @@ namespace DemoMVVMB.ViewModels
 {
     public class TaskViewModel : ViewModelBase
     {
-        string title;
+        private string title;
         public string Title
         {
             get { return title; }
@@ -23,7 +24,7 @@ namespace DemoMVVMB.ViewModels
             }
         }
 
-        string description;
+        private string description;
         public string Description
         {
             get { return description; }
@@ -37,12 +38,13 @@ namespace DemoMVVMB.ViewModels
             }
         }
 
-        string status;
-        public string Status
+        private bool status;
+        public bool Status
         {
             get { return status; }
             set
             {
+
                 if (status != value)
                 {
                     status = value;
@@ -51,15 +53,15 @@ namespace DemoMVVMB.ViewModels
             }
         }
 
-        List<TaskModel> task;
-        public List<TaskModel> Task
+        private ObservableCollection<TaskModel> tasks;
+        public ObservableCollection<TaskModel> Tasks
         {
-            get { return task; }
+            get { return tasks; }
             set
             {
-                if (task != value)
+                if (tasks != value)
                 {
-                    task = value;
+                    tasks = value;
                     OnPropertyChanged();
                 }
             }
@@ -70,13 +72,16 @@ namespace DemoMVVMB.ViewModels
 
         public TaskViewModel()
         {
+            ObservableCollection<TaskModel> TaskModels = new ObservableCollection<TaskModel>();
             Save = new Command(() =>
             {
-                TaskModel task= new TaskModel();
-                task.Title = Title;
-                TaskModel.Add(task);
+                TaskModels.Add(new TaskModel(Title, Status, Description));
+            });
+
+            Get = new Command(() =>
+            {
+                Tasks = new ObservableCollection<TaskModel>(TaskModels);
             });
         }
-
     }
 }

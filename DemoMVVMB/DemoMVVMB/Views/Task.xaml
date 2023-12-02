@@ -13,17 +13,34 @@
             <Entry FontSize="Title" Placeholder="Description"
                    Text="{Binding Description}"></Entry>
 
-            <Label Text="Status"></Label>
-            <Entry FontSize="Title" Placeholder="Status"
-                   Text="{Binding Status}"></Entry>
+            <StackLayout Orientation="Horizontal">
+                <Label Text="Status"
+                       VerticalOptions="CenterAndExpand" 
+                       FontSize="Title" />
+                <CheckBox
+                       IsChecked="{Binding Status}"/>
+            </StackLayout>
 
             <Button Text="Save" Command="{Binding Save}"></Button>
-            <Button Text="Get"></Button>
+            <Button Text="Get" Command="{Binding Get}"></Button>
 
-            <ListView ItemsSource="{Binding Task}">
+            <ListView
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                ItemsSource="{Binding Tasks}"
+                HasUnevenRows="True"
+                >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Label Text="{Binding Title}"></Label>
+                        <ViewCell>
+                            <StackLayout>
+                                <Label Text="{Binding Title}" />
+                                <StackLayout Orientation="Horizontal" Spacing="20">
+                                    <Label Text="{Binding Description}" HorizontalOptions="StartAndExpand"/>
+                                    <Switch IsToggled="{Binding Status}" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
